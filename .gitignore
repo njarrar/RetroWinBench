@@ -1,0 +1,8 @@
+winbench.exe
+src/data.c
+src/winbench.res
+tests/*.exe
+tests/t_*.txt
+icons/[a-d]_*.ico
+icons/icon-options.png
+__pycache__/
