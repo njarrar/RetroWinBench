@@ -1,0 +1,124 @@
+REFERENCE FIGURES FOR THE BENCHMARK (reference class: Pentium III 1000 / GeForce2 GTS, c. 2000-2001)
+Markers: [SRC] = taken from the cited page; [EST] = estimate from general knowledge of period reviews, no page checked.
+Note: roylongbottom.org.uk itself could not be reached from the research environment (DNS failure and archive.org blocked).
+The Dhrystone/Whetstone values below are Longbottom's PC results as reproduced in two habr.com articles that cite
+his results pages. Check them against the originals if you can reach them:
+  http://www.roylongbottom.org.uk/dhrystone%20results.htm
+  http://www.roylongbottom.org.uk/whetstone%20results.htm
+
+==========================================================================
+1. CPU: Dhrystone (VAX MIPS = DMIPS) and Whetstone (MWIPS)
+==========================================================================
+Source [SRC]: https://habr.com/ru/companies/icl_group/articles/743702/ (Dhrystone table, Longbottom data)
+              https://habr.com/ru/articles/772706 (Whetstone table, Longbottom data)
+Compiler/build: Longbottom's original 32-bit Windows/DOS builds. Dhry2 Opt = Dhrystone 2.1, optimised compile; NoOpt = no
+optimisation. Longbottom's pages say these are Watcom C/C++ builds (later Microsoft VC builds appear in separate columns).
+habr does not state the compiler for these rows, so treat the compiler as [EST]. Whetstone is his double-precision C version
+(the MWIPS figure).
+
+CPU                     MHz   Dhry1 Opt  Dhry2 Opt  Dhry2 NoOpt  Whetstone MWIPS
+Pentium                   75     112        87.1       18.9          48.2
+Pentium                  100     169       122         32.2          66.2
+Pentium                  133     239       181         39.0          88.3
+Pentium                  166     270       189         43.9         109
+Pentium                  200     353       269         48.1         132
+Pentium MMX              200     352       276         51.0         134
+Pentium Pro              200     373       312         91.9         161
+Pentium II               300     544       477        136           245
+Pentium II               450     813       713        204           368
+Pentium III (Katmai)     450     846       722        203           367
+Pentium III              600    1105       959        270             -
+Pentium III (Coppermine)1000    1858      1595        465           816   <-- REFERENCE
+Pentium III Tualatin    1200    2205      1907        571             -
+Pentium 4 (Willamette)  1700    2262      1843        242           603
+Pentium 4               3066    5052      4012        434          1119
+Pentium 4E (Prescott)   3000    4379      3553        566             -
+Athlon (K7)              600    1316       942        316             -   (Whetstone Athlon 500 = 381, 700 = 544)
+Athlon Thunderbird      1000    2282      1659        602           769
+Athlon XP               2080    4826      3700       1312             -   (Whetstone Athlon XP 1865 MHz = 1450)
+Athlon 64               2150    5658      4288       1355          1720
+Core 2 Duo              2400    7145      6446       1251          2057
+Core 2 Duo mobile       1830    5379      4952        966          1557
+Later Microsoft VC 18.00 build, Core 2 Duo 2400: Dhry1 Opt 8094 (32-bit) [SRC habr 743702].
+
+How cpus.csv uses this: rows with est=0 have index = 100 * sqrt( (Dhry2Opt/1595) * (MWIPS/816) ), the geometric
+mean of integer and FP speed relative to the PIII 1000. The other rows use MHz/10 * a per-clock factor fitted to these
+anchors and adjusted from memory of game benchmarks [EST]. For example, Athlon 64 and Core 2 rank higher in games than in
+Whetstone because of memory latency and cache.
+
+==========================================================================
+2. Memory bandwidth (MB/s)
+==========================================================================
+Theoretical peaks [SRC https://www.tomshardware.com/reviews/unstoppable,459-6.html]:
+  PC66 533, PC100 800, PC133 1066, DDR266 2133, DDR333 2667, DDR400 3200, dual DDR400 6400, dual DDR2-800 12800.
+
+Measured:
+Platform / memory                         Read     Write    Copy   Basis
+Pentium 430FX/HX, FPM/EDO (60ns)           ~110      ~70     ~45   [EST] (Longbottom MemSpeed-type numbers, P100-P200)
+Pentium II LX/BX, PC66 SDRAM               ~300     ~170    ~120   [EST]
+Pentium III BX, PC100 SDRAM                ~420     ~230    ~170   [EST]
+Pentium III i815/BX, PC133 SDRAM           ~580     ~280    ~220   [EST]. Sandra 2000/2001 int bandwidth was typically 550-700.
+                                                                     AnandTech i815 review ranks BX (o/c) > i815 > VIA 133A
+                                                                     but its text gives no figures:
+                                                                     https://at-web1.www.anandtech.com/show/569/13
+P4/Athlon XP, DDR266 single channel        ~1700     ~900    ~800   [EST]. Sandra about 1600-2000.
+P4 845PE, DDR333 single channel             2516-2562 (Sandra combined)  [SRC Guru3D 925XE review]
+P4 865PE, dual-channel DDR400               4306 (4623 with PAT, Sandra) [SRC Guru3D 925XE review]
+  https://www.guru3d.com/review/intel-925xe-express-chipset/page-5/
+Athlon 64 (754), DDR400 single channel     ~3000    ~1500   ~1800  [EST]
+Core 2 on 975X, dual DDR2-800               ~5460 (Sandra Lite 2007)     [SRC, derived from % of 12800 peak]
+Athlon 64 X2 5000+, dual DDR2-800           ~7910 (Sandra Lite 2007)     [SRC, same page]
+  https://hardwaresecrets.com/core-2-duo-e6700-and-core-2-extreme-x6800-review/10
+Core 2, dual DDR2-800 read/write/copy      ~6000    ~5000   ~4500  [EST] (Everest-style breakdown)
+
+==========================================================================
+3. Hard disks: sustained sequential read (outer to inner zone, MB/s) and random access time (ms) [all EST]
+==========================================================================
+Class                                            Seq read          Avg random access
+1997 5400rpm ATA (Quantum Fireball ST, WD Caviar)  6-9 (avg ~7)        ~17
+2001 7200rpm ATA/100 (IBM 75GXP, Maxtor DM Plus)   37 -> 20 (avg ~30)  ~13 (8.5 ms seek + 4.2 ms latency)
+2004 7200rpm SATA (Seagate 7200.7, WD800JD)        58 -> 32 (avg ~45)  ~13.5
+2007 7200rpm SATA (Seagate 7200.10, WD SE16)       78 -> 40 (avg ~62)  ~13
+WD Raptor 10000rpm (WD740GD, 2004)                 72 -> 45 (avg ~60)  ~8
+Use average seek plus half-rotation latency (5400rpm 5.6 ms, 7200rpm 4.2 ms, 10k 3.0 ms) as a sanity check.
+Suggested verification: StorageReview drive reviews (storagereview.com), e.g. 75GXP, WD740GD, 7200.10.
+
+==========================================================================
+4. GPU: fill rate and polygon throughput [all EST]
+==========================================================================
+I found no text-form 3DMark2001 fill rate results; the review pages show their charts as images. The values below are
+recalled from 3DMark2000/2001 fill rate charts and checked against the theoretical figures (core MHz x pipes x TMUs).
+Card              Theoretical       Measured single-tex  Measured multi-tex  Polygons (3DMark2001 High Poly, 1 light)
+Voodoo3 3000      333 Mpix / 333 Mtex     ~250 Mpix/s         ~310 Mtex/s       ~4-6 Mtri/s (no T&L, CPU-bound)
+Riva TNT2 (125)   250 Mpix / 250 Mtex     ~170                ~230              ~3-5 Mtri/s (no T&L, CPU-bound)
+GeForce 256 DDR   480 Mpix / 480 Mtex     ~390                ~460              ~11 Mtri/s
+GeForce2 GTS      800 Mpix / 1600 Mtex    ~350 (memory bound) ~700-750          ~17 Mtri/s   <-- REFERENCE
+Radeon 9700 Pro   2600 Mpix / 2600 Mtex   ~1050               ~2400             ~60-70 Mtri/s
+GeForce 6800 U    6400 Mpix / 6400 Mtex   ~3000 (3DMark05)    ~6000             ~120+ Mtri/s
+Theoretical specs: Wikipedia "List of Nvidia graphics processing units", "List of AMD graphics processing units",
+"3dfx Interactive" (Voodoo3 3000: 166 MHz, 1 pixel x 2 TMU).
+  https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units
+  https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units
+Fill rate review pages (charts are images): https://www.tomshardware.com/reviews/ati-delivers,556-11.html (R9500 Pro vs
+9700), https://www.tomshardware.com/reviews/xabre-rattling,496-15.html
+
+gpus.csv index: GeForce2 GTS = 100. Every row is est=1, scaled from memory of Quake 3, 3DMark2001/03/05/06 and Tom's VGA
+chart rankings. Ratios between neighbouring cards are more reliable than ratios across 10x gaps.
+
+==========================================================================
+5. Typical new mid-range PC by year [all EST, from memory of Dell/Gateway/Micron ads and PC Magazine/Maximum PC
+   buying guides; names match the csv files]
+==========================================================================
+Year CPU                     RAM MB  GPU                      Disk
+1997 Pentium MMX 200             32  ATI Rage Pro             4 GB 5400rpm ATA
+1998 Pentium II 300              64  NVIDIA Riva TNT          8 GB 5400rpm ATA
+1999 Pentium III 500            128  NVIDIA Riva TNT2         13 GB 7200rpm ATA/66
+2000 Pentium III 800            128  NVIDIA GeForce2 MX       30 GB 7200rpm ATA/100
+2001 Pentium 4 1.5 GHz          256  NVIDIA GeForce2 MX 400   40 GB 7200rpm ATA/100
+2002 Pentium 4 2.0A GHz         256  NVIDIA GeForce4 MX 440   60 GB 7200rpm ATA/100
+2003 Pentium 4 2.8C GHz         512  ATI Radeon 9600          120 GB 7200rpm ATA/100
+2004 Pentium 4 530              512  ATI Radeon X300          160 GB 7200rpm SATA
+2005 Athlon 64 3200+            1024 NVIDIA GeForce 6600      200 GB 7200rpm SATA
+2006 Core 2 Duo E6300           1024 NVIDIA GeForce 7600 GS   250 GB 7200rpm SATA
+2007 Core 2 Duo E4500           2048 NVIDIA GeForce 8600 GT   320 GB 7200rpm SATA
+2008 Core 2 Duo E8400           3072 NVIDIA GeForce 9600 GT   500 GB 7200rpm SATA

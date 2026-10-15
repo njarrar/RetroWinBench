@@ -1,0 +1,136 @@
+name,year,genre,os,min_cpu,min_ram,min_gpu,min_dx,rec_cpu,rec_ram,rec_gpu,disk_mb,est,src
+Quake,1996,FPS,95,Pentium 75,8,none,0,Pentium 133,16,Voodoo,80,0,pcgamingwiki.com
+Diablo,1996,Action RPG,95,Pentium 75,8,SVGA 2MB,3,Pentium 133,16,SVGA 2MB,50,1,
+Command & Conquer: Red Alert,1996,RTS,95,Pentium 75,8,SVGA 2MB,3,Pentium 90,16,SVGA 2MB,40,0,pcgamingwiki.com
+Tomb Raider,1996,Action Adventure,95,Pentium 75,8,SVGA 2MB,0,Pentium 133,16,Voodoo,20,0,pcgamingwiki.com
+Civilization II,1996,Strategy,95,Pentium 75,8,SVGA 2MB,0,Pentium 90,16,SVGA 2MB,15,1,
+Duke Nukem 3D,1996,FPS,95,Pentium 75,8,SVGA 2MB,0,Pentium 90,16,SVGA 2MB,30,1,
+Quake II,1997,FPS,95,Pentium 90,16,none,0,Pentium 133,24,Voodoo,25,0,pcgamingwiki.com
+Fallout,1997,RPG,95,Pentium 90,16,SVGA 2MB,3,Pentium 133,32,SVGA 2MB,10,0,pcgamingwiki.com
+Age of Empires,1997,RTS,95,Pentium 90,16,SVGA 2MB,5,Pentium 133,24,SVGA 2MB,80,0,pcgamingwiki.com
+Tomb Raider II,1997,Action Adventure,95,Pentium 90,16,SVGA 2MB,5,Pentium 133,16,Voodoo,2,0,pcgamingwiki.com
+Total Annihilation,1997,RTS,95,Pentium 133,16,SVGA 2MB,3,Pentium 166,32,SVGA 2MB,1100,0,pcgamingwiki.com
+Star Wars Jedi Knight: Dark Forces II,1997,FPS,95,Pentium 90,16,SVGA 2MB,5,Pentium 133,32,Voodoo,40,1,
+Dungeon Keeper,1997,Strategy,95,Pentium 166,16,SVGA 2MB,3,Pentium 133,16,SVGA 2MB,5,0,pcgamingwiki.com
+Theme Hospital,1997,Simulation,95,Pentium 75,8,SVGA 2MB,3,Pentium 90,16,SVGA 2MB,40,1,
+Carmageddon,1997,Racing,95,Pentium 75,8,SVGA 2MB,0,Pentium 133,16,SVGA 2MB,40,1,
+Blade Runner,1997,Adventure,95,Pentium 90,16,SVGA 2MB,5,Pentium 133,32,SVGA 2MB,150,0,pcgamingwiki.com
+Riven,1997,Adventure,95,Pentium 133,16,SVGA 2MB,5,Pentium 133,32,SVGA 2MB,75,0,pcgamingwiki.com
+Hexen II,1997,FPS,95,Pentium 90,16,none,3,Pentium 133,24,Voodoo,120,0,pcgamingwiki.com
+Half-Life,1998,FPS,95,Pentium 133,24,none,6,Pentium 166,32,Voodoo,400,0,pcgamingwiki.com
+StarCraft,1998,RTS,95,Pentium 90,16,SVGA 2MB,2,Pentium 133,32,SVGA 2MB,80,0,pcgamingwiki.com
+StarCraft: Brood War,1998,RTS,95,Pentium 90,16,SVGA 2MB,2,Pentium 133,32,SVGA 2MB,80,0,gamesystemrequirements.com
+Unreal,1998,FPS,95,Pentium 166,16,SVGA 2MB,5,Pentium II 266,64,Voodoo2,100,0,pcgamingwiki.com
+Thief: The Dark Project,1998,Stealth,95,Pentium 166,32,Voodoo,6,Pentium II 266,64,Voodoo2,60,0,gamesystemrequirements.com
+Baldur's Gate,1998,RPG,95,Pentium 166,16,SVGA 2MB,5,Pentium 200,32,SVGA 2MB,300,0,pcgamingwiki.com
+Grim Fandango,1998,Adventure,95,Pentium 133,32,SVGA 2MB,6,Pentium 200,32,Voodoo,30,0,pcgamingwiki.com
+Fallout 2,1998,RPG,95,Pentium 90,16,SVGA 2MB,3,Pentium 133,32,SVGA 2MB,30,0,pcgamingwiki.com
+Need for Speed III: Hot Pursuit,1998,Racing,95,Pentium 166,32,SVGA 2MB,6,Pentium II 266,64,Voodoo2,200,1,
+Tomb Raider III,1998,Action Adventure,95,Pentium 166,16,SVGA 2MB,5,Pentium II 233,32,Voodoo,30,1,
+Final Fantasy VII,1998,RPG,95,Pentium 166,32,SVGA 2MB,5,Pentium 166,32,Voodoo,260,0,pcgamingwiki.com
+Tom Clancy's Rainbow Six,1998,Tactical Shooter,95,Pentium 166,16,SVGA 2MB,6,Pentium II 233,32,Voodoo,57,0,pcgamingwiki.com
+Rollercoaster Tycoon,1999,Simulation,95,Pentium 90,16,SVGA 2MB,5,Pentium 133,32,SVGA 2MB,55,0,pcgamingwiki.com
+Age of Empires II: The Age of Kings,1999,RTS,95,Pentium 166,32,SVGA 2MB,6.1,Pentium II 266,64,SVGA 2MB,300,0,pcgamingwiki.com
+SimCity 3000,1999,Simulation,95,Pentium 166,32,SVGA 2MB,6,Pentium MMX 233,64,SVGA 2MB,230,0,pcgamingwiki.com
+System Shock 2,1999,FPS RPG,95,Pentium 200,32,Voodoo,6,Pentium II 300,64,Voodoo2,200,0,pcgamingwiki.com
+Homeworld,1999,RTS,95,Pentium II 233,32,none,6,Pentium II 300,64,Voodoo2,80,0,pcgamingwiki.com
+Unreal Tournament,1999,FPS,95,Pentium 200,32,Voodoo2,6,Pentium II 300,64,Voodoo2,300,0,pcgamingwiki.com
+Quake III Arena,1999,FPS,95,Pentium II 233,64,Voodoo,0,Pentium II 400,128,TNT2,25,0,pcgamingwiki.com
+FreeSpace 2,1999,Space Sim,95,Pentium 200,32,Voodoo,3,Pentium II 300,64,Voodoo2,400,0,pcgamingwiki.com
+Planescape: Torment,1999,RPG,95,Pentium MMX 200,32,SVGA 2MB,6,Pentium II 233,64,SVGA 2MB,650,0,pcgamingwiki.com
+Heroes of Might and Magic III,1999,Strategy,95,Pentium 133,32,SVGA 2MB,7,Pentium 166,64,SVGA 2MB,425,0,pcgamingwiki.com
+Command & Conquer: Tiberian Sun,1999,RTS,95,Pentium 166,32,SVGA 2MB,6,Pentium II 266,64,SVGA 2MB,200,0,pcgamingwiki.com
+Sid Meier's Alpha Centauri,1999,Strategy,95,Pentium 133,16,SVGA 2MB,6,Pentium 166,32,SVGA 2MB,60,0,pcgamingwiki.com
+Dungeon Keeper 2,1999,Strategy,95,Pentium 200,32,Voodoo,6,Pentium II 300,64,Voodoo2,200,1,
+Half-Life: Opposing Force,1999,FPS,95,Pentium 133,24,none,6,Pentium II 233,64,Voodoo2,450,1,
+Warcraft II: Battle.net Edition,1999,RTS,95,Pentium 90,16,SVGA 2MB,3,Pentium 133,32,SVGA 2MB,80,0,pcgamingwiki.com
+Deus Ex,2000,FPS RPG,95,Pentium II 300,64,TNT,7,Pentium III 500,128,TNT2,150,0,pcgamingwiki.com
+Diablo II,2000,Action RPG,95,Pentium MMX 233,32,SVGA 2MB,6.1,Pentium II 300,64,Voodoo2,650,0,pcgamingwiki.com
+Icewind Dale,2000,RPG,95,Pentium II 233,32,SVGA 2MB,7,Pentium II 233,64,SVGA 2MB,800,0,pcgamingwiki.com
+Baldur's Gate II: Shadows of Amn,2000,RPG,95,Pentium II 233,32,SVGA 2MB,5,Pentium II 300,64,Voodoo2,800,0,pcgamingwiki.com
+Need for Speed: Porsche Unleashed,2000,Racing,95,Pentium MMX 200,32,Voodoo,7,Pentium II 300,64,TNT2,150,0,pcgamingwiki.com
+The Sims,2000,Simulation,95,Pentium MMX 233,32,SVGA 2MB,7,Pentium II 300,64,SVGA 2MB,300,0,gamesystemrequirements.com
+MechWarrior 4: Vengeance,2000,Simulation,95,Pentium II 300,64,TNT,7,Pentium III 500,128,GeForce 256,600,1,
+Hitman: Codename 47,2000,Stealth,95,Pentium II 266,64,Voodoo2,7,Pentium III 450,128,TNT2,400,0,pcgamingwiki.com
+Command & Conquer: Red Alert 2,2000,RTS,95,Pentium II 266,64,SVGA 2MB,7,Pentium III 450,128,SVGA 2MB,350,0,pcgamingwiki.com
+No One Lives Forever,2000,FPS,95,Pentium II 300,64,Voodoo2,7,Pentium II 450,128,TNT2,400,0,pcgamingwiki.com
+American McGee's Alice,2000,Action Adventure,95,Pentium II 400,64,TNT,7,Pentium III 600,128,GeForce 256,600,0,pcgamingwiki.com
+Myst III: Exile,2001,Adventure,95,Pentium II 233,64,TNT,8,Pentium II 300,128,TNT2,250,0,gamesystemrequirements.com
+Max Payne,2001,Action,98,Pentium III 450,96,TNT2,8,Pentium III 700,128,GeForce 256,530,0,pcgamingwiki.com
+Black & White,2001,Strategy,95,Pentium II 350,64,Voodoo2,7,Pentium III 500,128,TNT2,600,0,gamesystemrequirements.com
+Operation Flashpoint: Cold War Crisis,2001,Tactical Shooter,95,Pentium II 400,64,Voodoo2,8,Pentium III 600,128,GeForce 256,450,0,gamesystemrequirements.com
+Return to Castle Wolfenstein,2001,FPS,95,Pentium II 400,128,TNT2,0,Pentium III 600,256,GeForce 256,1100,0,pcgamingwiki.com
+Serious Sam: The First Encounter,2001,FPS,95,Pentium II 300,64,TNT,8,Pentium III 500,128,GeForce 256,150,0,pcgamingwiki.com
+Civilization III,2001,Strategy,95,Pentium II 300,32,SVGA 2MB,8,Pentium III 500,128,SVGA 2MB,500,1,
+Diablo II: Lord of Destruction,2001,Action RPG,95,Pentium MMX 233,64,SVGA 2MB,3,Pentium II 300,128,Voodoo2,950,1,
+Gothic,2001,RPG,98,Pentium II 400,128,Voodoo,7,Pentium II 400,128,TNT2,700,0,pcgamingwiki.com
+Grand Theft Auto III,2002,Action,98,Pentium III 450,96,TNT2,8.1,Pentium III 700,128,GeForce 256,500,0,gamesystemrequirements.com
+Medal of Honor: Allied Assault,2002,FPS,95,Pentium II 450,128,TNT2,0,Pentium III 700,256,GeForce 256,1100,0,pcgamingwiki.com
+Mafia,2002,Action,98,Pentium III 500,96,GeForce 256,8.1,Pentium III 700,256,GeForce2 GTS,1800,0,pcgamingwiki.com
+Neverwinter Nights,2002,RPG,98,Pentium II 450,96,TNT2,0,Pentium III 800,256,GeForce 256,1200,0,pcgamingwiki.com
+The Elder Scrolls III: Morrowind,2002,RPG,98,Pentium III 500,128,GeForce 256,8.1,Pentium III 800,256,GeForce2 GTS,1000,0,pcgamingwiki.com
+Warcraft III: Reign of Chaos,2002,RTS,98,Pentium II 400,128,TNT,8.1,Pentium III 600,256,GeForce2 MX,700,0,pcgamingwiki.com
+Battlefield 1942,2002,FPS,98,Pentium III 500,128,GeForce 256,8.1,Pentium III 800,256,GeForce2 GTS,1200,0,pcgamingwiki.com
+Rollercoaster Tycoon 2,2002,Simulation,98,Pentium II 300,64,TNT,8.1,Pentium III 450,128,SVGA 2MB,800,0,pcgamingwiki.com
+Hitman 2: Silent Assassin,2002,Stealth,98,Pentium III 450,128,TNT2,8.1,Pentium III 800,256,GeForce2 GTS,800,0,pcgamingwiki.com
+Dungeon Siege,2002,Action RPG,98,Pentium II 350,128,Voodoo2,8,Pentium III 450,128,TNT2,1500,0,pcgamingwiki.com
+Need for Speed: Hot Pursuit 2,2002,Racing,98,Pentium III 450,128,TNT2,8,Pentium III 700,128,GeForce2 MX,1200,0,pcgamingwiki.com
+Command & Conquer: Generals,2003,RTS,98,Pentium III 800,128,GeForce2 MX,8.1,Pentium 4 1400,256,GeForce3,1800,0,pcgamingwiki.com
+SimCity 4,2003,Simulation,98,Pentium III 500,128,GeForce 256,7,Pentium III 1000,256,GeForce2 MX,1000,0,pcgamingwiki.com
+Tom Clancy's Splinter Cell,2003,Stealth,98,Pentium III 800,256,GeForce2 MX,8.1,Pentium 4 1300,256,GeForce3,1500,0,pcgamingwiki.com
+Max Payne 2: The Fall of Max Payne,2003,Action,98,Pentium III 1000,256,GeForce2 MX,9,Pentium 4 1800,512,GeForce4 Ti 4200,1500,0,pcgamingwiki.com
+Halo: Combat Evolved,2003,FPS,98,Pentium III 733,128,GeForce2 MX,9,Pentium 4 1300,256,GeForce4 Ti 4200,1300,0,pcgamingwiki.com
+Call of Duty,2003,FPS,98,Pentium III 600,128,GeForce2 MX,0,Pentium III 700,256,GeForce3,1400,0,pcgamingwiki.com
+Star Wars: Knights of the Old Republic,2003,RPG,98,Pentium III 1000,128,GeForce2 MX,0,Pentium 4 1600,512,GeForce4 Ti 4200,4000,0,pcgamingwiki.com
+Prince of Persia: The Sands of Time,2003,Action Adventure,98,Pentium III 800,256,GeForce3,9,Pentium 4 1500,512,GeForce3,1500,0,pcgamingwiki.com
+Grand Theft Auto: Vice City,2003,Action,98,Pentium III 800,128,GeForce 256,8.1,Pentium 4 1300,256,GeForce3,915,0,pcgamingwiki.com
+Counter-Strike 1.6,2003,FPS,98,Pentium III 500,96,TNT2,7,Pentium III 800,128,GeForce 256,4000,0,pcgamingwiki.com
+Need for Speed: Underground,2003,Racing,98,Pentium III 700,128,GeForce 256,9,Pentium 4 1400,256,GeForce3,2000,0,pcgamingwiki.com
+Warcraft III: The Frozen Throne,2003,RTS,98,Pentium II 400,128,TNT,8.1,Pentium III 600,256,GeForce2 MX,550,0,gamesystemrequirements.com
+Unreal Tournament 2004,2004,FPS,98,Pentium III 1000,128,GeForce2 MX,9,Pentium 4 1800,256,GeForce4 Ti 4200,4000,0,pcgamingwiki.com
+Far Cry,2004,FPS,98,Pentium III 1000,256,GeForce2 MX,9,Pentium 4 2000,512,Radeon 9500,4000,0,pcgamingwiki.com
+Doom 3,2004,FPS,2000,Pentium 4 1500,384,GeForce3,0,Pentium 4 2400,512,Radeon 9700,2200,0,pcgamingwiki.com
+Half-Life 2,2004,FPS,98,Pentium 4 1300,256,GeForce 256,7,Pentium 4 2400,512,Radeon 9600,4500,1,
+Counter-Strike: Source,2004,FPS,98,Pentium 4 1300,256,GeForce 256,7,Pentium 4 2400,512,Radeon 9600,4500,1,
+Rome: Total War,2004,Strategy,98,Pentium III 1000,256,GeForce3,9,Pentium 4 2000,512,GeForce4 Ti 4200,2900,0,pcgamingwiki.com
+The Sims 2,2004,Simulation,98,Pentium III 800,256,GeForce2 MX,9,Pentium 4 1600,512,GeForce4 Ti 4200,3500,0,pcgamingwiki.com
+Hitman: Contracts,2004,Stealth,98,Pentium III 800,128,GeForce2 MX,8,Pentium 4 1500,512,GeForce3,2000,0,pcgamingwiki.com
+Tom Clancy's Splinter Cell: Pandora Tomorrow,2004,Stealth,98,Pentium III 1000,128,GeForce3,8.1,Pentium 4 2000,512,Radeon 9600,2000,0,pcgamingwiki.com
+Need for Speed: Underground 2,2004,Racing,98,Pentium III 1000,256,GeForce2 MX,9,Pentium 4 2000,512,Radeon 9600,2000,0,pcgamingwiki.com
+World of Warcraft,2004,MMORPG,98,Pentium III 800,256,GeForce2 MX,7,Pentium 4 1800,512,GeForce4 Ti 4200,4000,0,pcgamingwiki.com
+Painkiller,2004,FPS,98,Pentium III 1133,384,GeForce2 GTS,8.1,Pentium 4 1600,512,Radeon 9600,2600,0,pcgamingwiki.com
+Grand Theft Auto: San Andreas,2005,Action,2000,Pentium III 1000,256,GeForce3,9,Pentium 4 2000,384,GeForce 6600,3600,0,pcgamingwiki.com
+Quake 4,2005,FPS,2000,Pentium 4 2000,256,GeForce3,0,Pentium 4 3000,1024,GeForce 6800,3200,0,pcgamingwiki.com
+F.E.A.R.,2005,FPS,2000,Pentium 4 1700,512,GeForce4 Ti 4200,9,Pentium 4 3000,1024,GeForce 6800,17000,0,pcgamingwiki.com
+Battlefield 2,2005,FPS,XP,Pentium 4 1700,512,Radeon 9500,9,Pentium 4 2400,1024,GeForce 6800,2300,0,pcgamingwiki.com
+Call of Duty 2,2005,FPS,2000,Pentium 4 1400,256,GeForce4 MX 440,9,Pentium 4 2000,512,GeForce 6600,4600,0,pcgamingwiki.com
+Need for Speed: Most Wanted,2005,Racing,2000,Pentium 4 1400,256,GeForce2 MX,9,Pentium 4 2400,512,GeForce 6600,3000,0,pcgamingwiki.com
+Age of Empires III,2005,RTS,XP,Pentium 4 1400,256,GeForce FX 5200,9,Core 2 Duo E6400,2048,GeForce 6800,4000,0,pcgamingwiki.com
+Civilization IV,2005,Strategy,2000,Pentium 4 1300,256,GeForce2 MX,9,Pentium 4 1800,512,GeForce FX 5700,1700,0,pcgamingwiki.com
+Tom Clancy's Splinter Cell: Chaos Theory,2005,Stealth,2000,Pentium 4 1400,256,GeForce3,9,Pentium 4 2200,512,GeForce 6600,4000,0,gamesystemrequirements.com
+The Elder Scrolls IV: Oblivion,2006,RPG,2000,Pentium 4 2000,512,Radeon 9500,9,Pentium 4 3000,1024,Radeon X800,4600,0,pcgamingwiki.com
+Need for Speed: Carbon,2006,Racing,2000,Pentium 4 1700,512,GeForce3,9,Pentium 4 3000,1024,GeForce 7800 GT,4700,0,pcgamingwiki.com
+Hitman: Blood Money,2006,Stealth,2000,Pentium 4 1500,512,GeForce FX 5200,9,Pentium 4 2400,1024,GeForce 6800,5000,0,pcgamingwiki.com
+Tomb Raider: Legend,2006,Action Adventure,2000,Pentium III 1000,256,GeForce3,9,Pentium 4 2000,512,Radeon 9800 Pro,9900,0,pcgamingwiki.com
+Company of Heroes,2006,RTS,XP,Pentium 4 2000,512,GeForce3,9,Pentium 4 3000,1024,GeForce 6800,6500,0,pcgamingwiki.com
+Prey,2006,FPS,2000,Pentium 4 2000,512,Radeon 9500,0,Pentium 4 2600,1024,Radeon X800,2200,0,gamesystemrequirements.com
+Crysis,2007,FPS,XP,Pentium 4 2800,1024,Radeon 9800 Pro,9,Athlon 64 X2 4400+,1536,Radeon HD 3850,12000,0,pcgamingwiki.com
+BioShock,2007,FPS,XPSP2,Pentium 4 2400,1024,GeForce 6600,9.3,Core 2 Duo E6400,2048,GeForce 7900 GT,8000,0,pcgamingwiki.com
+S.T.A.L.K.E.R.: Shadow of Chernobyl,2007,FPS,2000,Pentium 4 2000,512,GeForce FX 5700,9,Core 2 Duo E6400,1536,GeForce 7900 GT,10000,0,gamesystemrequirements.com
+Portal,2007,Puzzle,XP,Pentium 4 1700,512,GeForce3,8.1,Pentium 4 3000,1024,Radeon 9600,4000,0,pcgamingwiki.com
+Team Fortress 2,2007,FPS,XP,Pentium 4 1700,512,Radeon 8500,8.1,Pentium 4 3000,1024,Radeon 9600,15000,0,gamesystemrequirements.com
+Call of Duty 4: Modern Warfare,2007,FPS,XP,Pentium 4 2400,512,GeForce 6600,9,Core 2 Duo E6600,1024,GeForce 7800 GT,8000,0,pcgamingwiki.com
+Command & Conquer 3: Tiberium Wars,2007,RTS,XP,Pentium 4 2000,512,GeForce4 Ti 4200,9,Pentium 4 3000,1024,GeForce 6800,6000,0,pcgamingwiki.com
+Tomb Raider: Anniversary,2007,Action Adventure,2000,Pentium 4 1400,256,GeForce3,9,Pentium 4 2400,1024,GeForce 6800,4000,0,pcgamingwiki.com
+The Witcher,2007,RPG,XP,Pentium 4 2400,1024,Radeon 9800 Pro,9,Core 2 Duo E6400,2048,GeForce 7900 GT,15000,0,pcgamingwiki.com
+Fallout 3,2008,RPG,XP,Pentium 4 2400,1024,Radeon X800,9,Core 2 Duo E6400,2048,GeForce 8800 GT,7000,0,pcgamingwiki.com
+Grand Theft Auto IV,2008,Action,XPSP2,Core 2 Duo E4300,1536,GeForce 7900 GT,9.3,Core 2 Quad Q6600,2560,GeForce 8600 GT,22000,0,pcgamingwiki.com
+Left 4 Dead,2008,FPS,XP,Pentium 4 3000,1024,Radeon 9600,9,Core 2 Duo E6600,1024,Radeon X1600,7500,0,pcgamingwiki.com
+Mass Effect,2008,RPG,XP,Pentium 4 2400,1024,GeForce 6800,9.3,Core 2 Duo E6400,2048,GeForce 7900 GT,12000,0,pcgamingwiki.com
+Dead Space,2008,Action,XPSP2,Pentium 4 2800,1024,GeForce 6800,9.3,Core 2 Duo E6400,2048,GeForce 8600 GT,7500,0,pcgamingwiki.com
+Tomb Raider: Underworld,2008,Action Adventure,XP,Pentium 4 3000,1024,GeForce 6800,9.3,Core 2 Duo E6400,2048,GeForce 8800 GT,8000,0,pcgamingwiki.com
+Left 4 Dead 2,2009,FPS,XP,Pentium 4 3000,1024,Radeon X800,9,Core 2 Duo E6600,1024,Radeon X1600,7500,0,gamesystemrequirements.com
+Batman: Arkham Asylum,2009,Action,XP,Pentium 4 3000,1024,GeForce 6600,9,Core 2 Duo E6600,2048,GeForce 8800 GT,8000,0,pcgamingwiki.com
+Dragon Age: Origins,2009,RPG,XPSP2,Core 2 Duo E4300,1024,Radeon X800,9,Core 2 Duo E6600,2048,Radeon HD 3850,20000,0,pcgamingwiki.com
+Call of Duty: Modern Warfare 2,2009,FPS,XP,Pentium 4 3200,1024,Radeon 9800 Pro,9,Core 2 Duo E6600,2048,GeForce 7800 GT,12000,0,pcgamingwiki.com
+Torchlight,2009,Action RPG,XPSP2,Pentium III 800,512,GeForce2 MX,9,Pentium 4 2400,1024,GeForce 6600,822,0,pcgamingwiki.com

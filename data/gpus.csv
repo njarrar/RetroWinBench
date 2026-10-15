@@ -1,0 +1,153 @@
+name,year,vram_mb,dx,index,match,est
+3dfx Voodoo5 6000,2000,128,6,140,voodoo5 6000,1
+3dfx Voodoo5 5500,2000,64,6,95,voodoo5,1
+3dfx Voodoo4 4500,2000,32,6,55,voodoo4,1
+3dfx Voodoo3 3500,1999,16,6,60,voodoo3 3500,1
+3dfx Voodoo3 3000,1999,16,6,55,voodoo3 3000,1
+3dfx Voodoo3 2000,1999,16,6,45,voodoo3 2000,1
+3dfx Voodoo3,1999,16,6,50,voodoo3,1
+3dfx Voodoo Banshee,1998,16,6,30,banshee,1
+3dfx Voodoo2,1998,12,6,30,voodoo2,1
+3dfx Voodoo Rush,1997,4,5,14,voodoo rush,1
+3dfx Voodoo Graphics,1996,4,5,18,voodoo graphics,1
+Rendition Verite V2200,1997,8,5,15,v2200,1
+Rendition Verite V1000,1996,4,5,8,verite,1
+S3 Savage 2000,1999,32,7,50,savage2000,1
+S3 Savage4,1999,32,6,30,savage4,1
+S3 Savage3D,1998,8,6,20,savage3d,1
+S3 ViRGE,1996,4,5,3,virge,1
+Matrox Parhelia,2002,128,8,140,parhelia,1
+Matrox G550,2001,32,6,55,g550,1
+Matrox G450,2000,32,6,45,g450,1
+Matrox G400,1999,32,6,50,g400,1
+Matrox G200,1998,8,6,25,g200,1
+Matrox Mystique,1996,4,5,4,mystique,1
+Intel 740,1998,8,6,20,intel 740,1
+Intel Extreme Graphics 2,2003,64,7,45,82865g,1
+Intel Extreme Graphics,2002,64,7,35,82845g,1
+Intel GMA 900,2004,128,9,70,915g,1
+Intel GMA 950,2005,224,9,85,945g,1
+Intel GMA X4500,2008,384,10,180,4 series express,1
+Intel GMA X3100,2007,384,10,100,965 express,1
+SiS Xabre 400,2002,64,8,120,xabre,1
+SiS 315,2001,32,7,50,sis 315,1
+SiS 300,1999,8,6,15,sis 300,1
+SiS 6326,1998,8,5,4,6326,1
+ATI Rage Fury MAXX,1999,64,6,55,maxx,1
+ATI Rage 128 Pro,1999,32,6,38,rage 128 pro,1
+ATI Rage 128,1998,32,6,30,rage 128,1
+ATI Rage Pro,1997,8,5,10,rage pro,1
+ATI Radeon 7500,2001,64,7,120,radeon 7500,1
+ATI Radeon 7000,2001,32,7,45,radeon 7000,1
+ATI Radeon VE,2001,32,7,45,radeon ve,1
+ATI Radeon 7200,2000,32,7,90,radeon 7200,1
+ATI Radeon 8500,2001,64,8,200,radeon 8500,1
+ATI Radeon 9100,2003,128,8,190,radeon 9100,1
+ATI Radeon 9000,2002,64,8,140,radeon 9000,1
+ATI Radeon 9200,2003,128,8,145,radeon 9200,1
+ATI Radeon 9250,2004,128,8,130,radeon 9250,1
+ATI Radeon 9500 Pro,2002,128,9,300,radeon 9500 pro,1
+ATI Radeon 9500,2002,64,9,220,radeon 9500,1
+ATI Radeon 9550,2004,128,9,220,radeon 9550,1
+ATI Radeon 9600 XT,2003,128,9,290,radeon 9600 xt,1
+ATI Radeon 9600 Pro,2003,128,9,260,radeon 9600 pro,1
+ATI Radeon 9600,2003,128,9,240,radeon 9600,1
+ATI Radeon 9700 Pro,2002,128,9,400,radeon 9700 pro,1
+ATI Radeon 9700,2002,128,9,350,radeon 9700,1
+ATI Radeon 9800 XT,2003,256,9,500,radeon 9800 xt,1
+ATI Radeon 9800 Pro,2003,128,9,450,radeon 9800 pro,1
+ATI Radeon 9800,2003,128,9,400,radeon 9800,1
+ATI Radeon,2000,32,7,90,radeon ddr,1
+ATI Radeon X300,2004,128,9,200,radeon x300,1
+ATI Radeon X600,2004,128,9,260,radeon x600,1
+ATI Radeon X700 Pro,2004,128,9,430,radeon x700,1
+ATI Radeon X800 XT,2004,256,9,850,radeon x800 xt,1
+ATI Radeon X800 Pro,2004,256,9,700,radeon x800 pro,1
+ATI Radeon X800,2004,256,9,650,radeon x800,1
+ATI Radeon X850 XT,2005,256,9,900,radeon x850,1
+ATI Radeon X1300,2005,128,9.3,300,radeon x1300,1
+ATI Radeon X1550,2006,256,9.3,330,radeon x1550,1
+ATI Radeon X1600,2005,256,9.3,450,radeon x1600,1
+ATI Radeon X1650,2006,256,9.3,550,radeon x1650,1
+ATI Radeon X1800,2005,256,9.3,1100,radeon x1800,1
+ATI Radeon X1900,2006,512,9.3,1400,radeon x1900,1
+ATI Radeon X1950 Pro,2006,256,9.3,1150,radeon x1950 pro,1
+ATI Radeon X1950 XTX,2006,512,9.3,1550,radeon x1950,1
+ATI Radeon HD 2400,2007,256,10,350,radeon hd 2400,1
+ATI Radeon HD 2600,2007,256,10,750,radeon hd 2600,1
+ATI Radeon HD 2900 XT,2007,512,10,1700,radeon hd 2900,1
+ATI Radeon HD 3450,2008,256,10,400,radeon hd 34,1
+ATI Radeon HD 3650,2008,512,10,850,radeon hd 36,1
+ATI Radeon HD 3870,2007,512,10,1800,radeon hd 3870,1
+ATI Radeon HD 3850,2007,256,10,1600,radeon hd 38,1
+ATI Radeon HD 4350,2008,512,10,450,radeon hd 43,1
+ATI Radeon HD 4670,2008,512,10,1400,radeon hd 46,1
+ATI Radeon HD 4870,2008,512,10,3300,radeon hd 4870,1
+ATI Radeon HD 4850,2008,512,10,2800,radeon hd 48,1
+NVIDIA Riva 128,1997,4,5,12,riva 128,1
+NVIDIA Vanta,1999,16,6,25,vanta,1
+NVIDIA Riva TNT2 M64,1999,32,6,30,tnt2 model 64,1
+NVIDIA Riva TNT2 M64,1999,32,6,30,tnt2 m64,1
+NVIDIA Riva TNT2 Ultra,1999,32,6,50,tnt2 ultra,1
+NVIDIA Riva TNT2,1999,32,6,40,tnt2,1
+NVIDIA Riva TNT,1998,16,6,28,riva tnt,1
+NVIDIA GeForce 256 DDR,1999,32,7,80,geforce 256 ddr,1
+NVIDIA GeForce 256,1999,32,7,70,geforce 256,1
+NVIDIA GeForce2 MX 400,2001,64,7,65,geforce2 mx 400,1
+NVIDIA GeForce2 MX 200,2001,32,7,40,geforce2 mx 200,1
+NVIDIA GeForce2 MX,2000,32,7,60,geforce2 mx,1
+NVIDIA GeForce2 Go,2000,32,7,50,geforce2 go,1
+NVIDIA GeForce2 Ultra,2000,64,7,125,geforce2 ultra,1
+NVIDIA GeForce2 Pro,2000,64,7,110,geforce2 pro,1
+NVIDIA GeForce2 Ti,2001,64,7,115,geforce2 ti,1
+NVIDIA GeForce2 GTS,2000,32,7,100,geforce2 gts,1
+NVIDIA GeForce2,2000,32,7,100,geforce2,1
+NVIDIA GeForce3 Ti 500,2001,64,8,175,geforce3 ti 500,1
+NVIDIA GeForce3 Ti 200,2001,64,8,140,geforce3 ti 200,1
+NVIDIA GeForce3,2001,64,8,150,geforce3,1
+NVIDIA GeForce4 MX 4000,2003,64,7,75,geforce4 mx 4000,1
+NVIDIA GeForce4 MX 440,2002,64,7,110,geforce4 mx 440,1
+NVIDIA GeForce4 MX 420,2002,64,7,70,geforce4 mx 420,1
+NVIDIA GeForce4 MX,2002,64,7,90,geforce4 mx,1
+NVIDIA GeForce4 Ti 4800,2003,128,8,280,geforce4 ti 4800,1
+NVIDIA GeForce4 Ti 4600,2002,128,8,270,geforce4 ti 4600,1
+NVIDIA GeForce4 Ti 4400,2002,128,8,250,geforce4 ti 4400,1
+NVIDIA GeForce4 Ti 4200,2002,128,8,220,geforce4 ti 4200,1
+NVIDIA GeForce4 Ti,2002,128,8,240,geforce4 ti,1
+NVIDIA GeForce FX 5200,2003,128,9,100,geforce fx 5200,1
+NVIDIA GeForce FX 5500,2004,128,9,110,geforce fx 5500,1
+NVIDIA GeForce FX 5600,2003,128,9,160,geforce fx 5600,1
+NVIDIA GeForce FX 5700 Ultra,2003,128,9,260,geforce fx 5700 ultra,1
+NVIDIA GeForce FX 5700,2003,128,9,210,geforce fx 5700,1
+NVIDIA GeForce FX 5800,2003,128,9,350,geforce fx 5800,1
+NVIDIA GeForce FX 5900 Ultra,2003,256,9,420,geforce fx 5900 ultra,1
+NVIDIA GeForce FX 5900 XT,2003,128,9,360,geforce fx 5900 xt,1
+NVIDIA GeForce FX 5900,2003,128,9,390,geforce fx 5900,1
+NVIDIA GeForce FX 5950 Ultra,2003,256,9,450,geforce fx 5950,1
+NVIDIA GeForce 6200,2004,128,9.3,220,geforce 6200,1
+NVIDIA GeForce 6600 GT,2004,128,9.3,550,geforce 6600 gt,1
+NVIDIA GeForce 6600,2004,128,9.3,400,geforce 6600,1
+NVIDIA GeForce 6800 Ultra,2004,256,9.3,900,geforce 6800 ultra,1
+NVIDIA GeForce 6800 GT,2004,256,9.3,800,geforce 6800 gt,1
+NVIDIA GeForce 6800,2004,128,9.3,650,geforce 6800,1
+NVIDIA GeForce 7300,2006,256,9.3,280,geforce 7300,1
+NVIDIA GeForce 7600 GT,2006,256,9.3,850,geforce 7600 gt,1
+NVIDIA GeForce 7600 GS,2006,256,9.3,600,geforce 7600 gs,1
+NVIDIA GeForce 7800 GTX,2005,256,9.3,1200,geforce 7800 gtx,1
+NVIDIA GeForce 7800 GT,2005,256,9.3,1050,geforce 7800 gt,1
+NVIDIA GeForce 7900 GTX,2006,512,9.3,1500,geforce 7900 gtx,1
+NVIDIA GeForce 7900 GT,2006,256,9.3,1250,geforce 7900 gt,1
+NVIDIA GeForce 7950 GT,2006,512,9.3,1400,geforce 7950 gt,1
+NVIDIA GeForce 8400 GS,2007,256,10,350,geforce 8400,1
+NVIDIA GeForce 8500 GT,2007,256,10,450,geforce 8500,1
+NVIDIA GeForce 8600 GTS,2007,256,10,1100,geforce 8600 gts,1
+NVIDIA GeForce 8600 GT,2007,256,10,900,geforce 8600 gt,1
+NVIDIA GeForce 8800 Ultra,2007,768,10,3000,geforce 8800 ultra,1
+NVIDIA GeForce 8800 GTX,2006,768,10,2800,geforce 8800 gtx,1
+NVIDIA GeForce 8800 GTS,2006,640,10,2200,geforce 8800 gts,1
+NVIDIA GeForce 8800 GT,2007,512,10,2600,geforce 8800 gt,1
+NVIDIA GeForce 9400 GT,2008,512,10,500,geforce 9400,1
+NVIDIA GeForce 9500 GT,2008,512,10,1000,geforce 9500,1
+NVIDIA GeForce 9600 GT,2008,512,10,2300,geforce 9600,1
+NVIDIA GeForce 9800 GTX,2008,512,10,2900,geforce 9800 gtx,1
+NVIDIA GeForce 9800 GT,2008,512,10,2600,geforce 9800 gt,1

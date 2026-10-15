@@ -1,0 +1,12 @@
+key,value,source
+REF_DESC,"Pentium III 1000, PC133 SDRAM, 7200rpm ATA/100 disk, GeForce2 GTS",
+REF_DMIPS,1595,Roy Longbottom Dhrystone 2.1 optimised result for Pentium III 1000 (via habr.com/ru/companies/icl_group/articles/743702)
+REF_MWIPS,816,Roy Longbottom Whetstone result for Pentium III 1000 (via habr.com/ru/articles/772706)
+REF_MEM_READ,580,estimate: Sandra 2000/2001 PC133 i815/BX results of 550-700 MB/s
+REF_MEM_WRITE,280,estimate
+REF_MEM_COPY,220,estimate
+REF_DISK_READ,30,estimate: IBM 75GXP / Maxtor DiamondMax Plus average sustained read
+REF_DISK_WRITE,28,estimate
+REF_DISK_ACCESS,13,estimate: 8.5 ms seek + 4.2 ms rotational latency
+REF_FILL,350,estimate: GeForce2 GTS 32-bit single-texture fill rate in 3DMark2001 (800 Mpix/s theoretical; memory bound)
+REF_TRIS,10,estimate: GeForce2 GTS with OpenGL vertex arrays from system memory
