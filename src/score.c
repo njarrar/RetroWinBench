@@ -16,12 +16,10 @@ static double os_level(const SysInfo *si)
 
 static int find_gpu(const char *name)
 {
-    char low[160]; int i;
+    int i;
     if (!name || !name[0]) return -1;
-    rt_fmt(low, sizeof low, "%s", name);
-    rt_lower(low);
     for (i = 0; i < g_ngpus; i++)
-        if (rt_stristr(low, g_gpus[i].match)) return i;
+        if (rt_stristr(name, g_gpus[i].match)) return i;
     return -1;
 }
 
@@ -64,6 +62,7 @@ typedef struct { char *p; int left; } Buf;
 static void out(Buf *b, const char *f, ...)
 {
     va_list ap; int n;
+    if (b->left <= 1) return;
     va_start(ap, f);
     n = rt_vfmt(b->p, b->left, f, ap);
     va_end(ap);
@@ -79,8 +78,10 @@ static double year_score(const YearRow *y)
 static int nearest_cpu(double idx)
 {
     int i, best = 0; double bd = 1e9;
+    idx = clampd(idx, 1);
     for (i = 0; i < g_ncpus; i++) {
-        double dd = rt_log(g_cpus[i].index) - rt_log(clampd(idx, 1)); if (dd < 0) dd = -dd;
+        double v = g_cpus[i].index;
+        double dd = v > idx ? v / idx : idx / v;
         if (dd < bd) { bd = dd; best = i; }
     }
     return best;
@@ -89,8 +90,10 @@ static int nearest_cpu(double idx)
 static int nearest_gpu(double idx)
 {
     int i, best = 0; double bd = 1e9;
+    idx = clampd(idx, 1);
     for (i = 0; i < g_ngpus; i++) {
-        double dd = rt_log(g_gpus[i].index) - rt_log(clampd(idx, 1)); if (dd < 0) dd = -dd;
+        double v = g_gpus[i].index;
+        double dd = v > idx ? v / idx : idx / v;
         if (dd < bd) { bd = dd; best = i; }
     }
     return best;
@@ -108,7 +111,7 @@ static int check_game(const Results *r, const GameRow *gm, char *why, int cap)
     double cpu = r->s_cpu, gi = r->gpu_game_index, gdx = r->gpu_dx;
     unsigned ram = r->si.ram_mb;
     Buf b; int ok = 1;
-    b.p = why; b.left = cap; why[0] = 0;
+    b.p = why; b.left = cap; if (why) why[0] = 0;
 
     if (osl < gm->os || (gm->os == 2 && osl < 2)) { out(&b, "needs %s; ", os_need[(int)gm->os]); ok = 0; }
     if (gm->min_dx10 >= 100 && osl < 5) { out(&b, "needs DirectX 10 (Vista); "); ok = 0; }
@@ -126,7 +129,7 @@ static int check_game(const Results *r, const GameRow *gm, char *why, int cap)
             out(&b, "card lacks DirectX %d.%d features; ", need_dx / 10, need_dx % 10); ok = 0;
         }
     }
-    if (!ok) { if (b.p > why + 1) b.p[-2] = 0; return 0; }
+    if (!ok) { if (why && b.p > why + 1) b.p[-2] = 0; return 0; }
     if (gm->min_dx10 > 0 && r->si.dx_ver * 10 + 0.5 < gm->min_dx10 && gm->min_dx10 < 100)
         out(&b, "install DirectX %d.%d; ", gm->min_dx10 / 10, gm->min_dx10 % 10);
     if (r->si.disk_free_mb > 0 && r->si.disk_free_mb < gm->disk_mb) out(&b, "free %d MB disk; ", gm->disk_mb);
@@ -135,21 +138,21 @@ static int check_game(const Results *r, const GameRow *gm, char *why, int cap)
         int slow_cpu = cpu < g_cpus[gm->rec_cpu].index * 0.95;
         int low_ram = ram + 4 < (unsigned)gm->rec_ram;
         int slow_gpu = gm->rec_gpu >= 0 && gi < g_gpus[gm->rec_gpu].index * 0.9;
-        if (!slow_cpu && !low_ram && !slow_gpu) { if (b.p > why + 1) b.p[-2] = 0; return 2; }
+        if (!slow_cpu && !low_ram && !slow_gpu) { if (why && b.p > why + 1) b.p[-2] = 0; return 2; }
         out(&b, "below recommended:%s%s%s; ", slow_cpu ? " CPU" : "", slow_gpu ? " 3D" : "", low_ram ? " RAM" : "");
-        if (b.p > why + 1) b.p[-2] = 0;
+        if (why && b.p > why + 1) b.p[-2] = 0;
         return 1;
     }
 }
 
-static void games_section(Buf *b, const Results *r, int want, const char *title)
+static void games_section(Buf *b, const Results *r, const unsigned char *tiers, int count, int want, const char *title)
 {
-    int i, n = 0; char why[160];
-    for (i = 0; i < g_ngames; i++) if (check_game(r, &g_games[i], why, sizeof why) == want) n++;
-    out(b, "\r\n%s (%d)\r\n", title, n);
+    int i; char why[160];
+    out(b, "\r\n%s (%d)\r\n", title, count);
     for (i = 0; i < g_ngames; i++) {
         const GameRow *gm = &g_games[i];
-        if (check_game(r, gm, why, sizeof why) != want) continue;
+        if (tiers[i] != want) continue;
+        check_game(r, gm, why, sizeof why);
         out(b, "  %-38.38s %d%s", gm->name, gm->year, gm->est ? "*" : " ");
         if (why[0]) out(b, "  %s", why);
         out(b, "\r\n");
@@ -158,7 +161,9 @@ static void games_section(Buf *b, const Results *r, int want, const char *title)
 
 int report_build(Results *r, char *outbuf, int cap)
 {
-    Buf b; int i, best_year = -1;
+    Buf b; int i, best_year = -1, counts[3] = { 0, 0, 0 };
+    unsigned char tiers[256];
+    double ys[16];
     const SysInfo *si = &r->si;
     b.p = outbuf; b.left = cap;
 
@@ -211,19 +216,27 @@ int report_build(Results *r, char *outbuf, int cap)
     if (r->gpu_game_index > 0)
         out(&b, "  3D card is faster than %d%% of the %d cards in the table.\r\n", pct_gpu(r->gpu_game_index), g_ngpus);
 
-    for (i = 0; i < g_nyears; i++) if (year_score(&g_years[i]) <= r->s_total) best_year = i;
+    for (i = 0; i < g_nyears; i++) {
+        ys[i] = year_score(&g_years[i]);
+        if (ys[i] <= r->s_total) best_year = i;
+    }
     out(&b, "\r\nTypical new mid-range PC by year\r\n");
     for (i = 0; i < g_nyears; i++) {
-        out(&b, "  %d  %6.0f  %s%s\r\n", g_years[i].year, year_score(&g_years[i]), g_years[i].desc,
+        out(&b, "  %d  %6.0f  %s%s\r\n", g_years[i].year, ys[i], g_years[i].desc,
             i == best_year ? "   <== this PC" : "");
     }
     if (best_year < 0) out(&b, "  This PC scores below a typical %d PC.\r\n", g_years[0].year);
     else out(&b, "  This PC matches or beats a typical new PC from %d.\r\n", g_years[best_year].year);
 
+    for (i = 0; i < g_ngames; i++) {
+        int t = check_game(r, &g_games[i], 0, 0);
+        tiers[i] = (unsigned char)t;
+        counts[t]++;
+    }
     out(&b, "\r\nGAMES  (* = some specs in the table are estimates)\r\n");
-    games_section(&b, r, 2, "Runs well: meets the recommended specs");
-    games_section(&b, r, 1, "Runs: meets the minimum specs, use low settings");
-    games_section(&b, r, 0, "Will not run well: below the minimum");
+    games_section(&b, r, tiers, counts[2], 2, "Runs well: meets the recommended specs");
+    games_section(&b, r, tiers, counts[1], 1, "Runs: meets the minimum specs, use low settings");
+    games_section(&b, r, tiers, counts[0], 0, "Will not run well: below the minimum");
 
     out(&b, "\r\nReference figures and game specs come from published benchmarks and\r\n"
             "box requirements; many are estimates. See README.txt for sources.\r\n");

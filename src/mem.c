@@ -6,12 +6,13 @@ volatile unsigned g_mem_sink;
 
 static unsigned read_block(const unsigned *p, unsigned words)
 {
-    unsigned a = 0, b = 0, c = 0, d = 0, i;
-    for (i = 0; i < words; i += 8) {
-        a += p[i]; b += p[i + 2]; c += p[i + 4]; d += p[i + 6];
-        a ^= p[i + 1]; b ^= p[i + 3]; c ^= p[i + 5]; d ^= p[i + 7];
+    unsigned a = 0, b = 0;
+    const unsigned *end = p + (words & ~7u);
+    for (; p < end; p += 8) {
+        a += p[0] + p[4]; b += p[2] + p[6];
+        a ^= p[1] + p[5]; b ^= p[3] + p[7];
     }
-    return a + b + c + d;
+    return a + b;
 }
 
 static void write_block(unsigned *p, unsigned words, unsigned v)
@@ -24,7 +25,7 @@ static void copy_block(unsigned *d, const unsigned *s, unsigned words)
     __asm__ volatile("cld\n\trep movsl" : "+D"(d), "+S"(s), "+c"(words) : : "memory");
 }
 
-static double timed(int kind, unsigned *a, unsigned *b, unsigned bytes)
+static double timed(int kind, unsigned *a, unsigned *b, unsigned bytes, ProgressFn p)
 {
     unsigned words = bytes / 4, reps = 0;
     double t0 = now_sec(), t;
@@ -34,6 +35,7 @@ static double timed(int kind, unsigned *a, unsigned *b, unsigned bytes)
         else copy_block(b, a, words);
         reps++;
         t = now_sec() - t0;
+        p(0);
     } while (t < 1.0);
     return (double)bytes * reps / t / (1024.0 * 1024.0);
 }
@@ -51,9 +53,9 @@ void bench_mem(MemResult *r, unsigned ram_mb, ProgressFn p)
     if (!a || !b) { rt_free(a); rt_free(b); return; }
     write_block(a, bytes / 4, 1); write_block(b, bytes / 4, 2);   /* touch every page first */
 
-    p("RAM: read speed...");  r->read_mbs  = timed(0, a, b, bytes);
-    p("RAM: write speed..."); r->write_mbs = timed(1, a, b, bytes);
-    p("RAM: copy speed...");  r->copy_mbs  = timed(2, a, b, bytes);
+    p("RAM: read speed...");  r->read_mbs  = timed(0, a, b, bytes, p);
+    p("RAM: write speed..."); r->write_mbs = timed(1, a, b, bytes, p);
+    p("RAM: copy speed...");  r->copy_mbs  = timed(2, a, b, bytes, p);
 
     rt_free(a); rt_free(b);
 }

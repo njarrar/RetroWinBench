@@ -11,7 +11,7 @@ static HINSTANCE g_inst;
 static HWND g_wnd, g_run, g_save, g_status, g_text;
 static HFONT g_font;
 static Results g_res;
-static int g_running, g_done, g_auto, g_run_now;
+static int g_running, g_done, g_auto, g_run_now, g_report_len;
 static char g_report[60000];   /* Windows 9x edit boxes hold at most 64 KB */
 
 static void pump(void)
@@ -39,21 +39,29 @@ static void exe_dir(char *out, int cap)
     *s = 0;
 }
 
+static int write_report_file(const char *path, DWORD len)
+{
+    HANDLE h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+    DWORD n = 0;
+    int ok;
+    if (h == INVALID_HANDLE_VALUE) return 0;
+    ok = WriteFile(h, g_report, len, &n, 0) && n == len;
+    CloseHandle(h);
+    if (!ok) DeleteFileA(path);
+    return ok;
+}
+
 static int save_report(char *path_out, int cap)
 {
     char path[MAX_PATH];
-    HANDLE h; DWORD n;
+    DWORD len = g_report_len > 0 ? (DWORD)g_report_len : strlen(g_report);
     exe_dir(path, sizeof path);
     rt_fmt(path + strlen(path), (int)(sizeof path - strlen(path)), "winbench-report.txt");
-    h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-    if (h == INVALID_HANDLE_VALUE) {   /* program on a CD or read-only folder */
+    if (!write_report_file(path, len)) {   /* program on a CD, read-only folder or full floppy */
         GetTempPathA(sizeof path, path);
         rt_fmt(path + strlen(path), (int)(sizeof path - strlen(path)), "winbench-report.txt");
-        h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-        if (h == INVALID_HANDLE_VALUE) return 0;
+        if (!write_report_file(path, len)) return 0;
     }
-    WriteFile(h, g_report, strlen(g_report), &n, 0);
-    CloseHandle(h);
     rt_fmt(path_out, cap, "%s", path);
     return 1;
 }
@@ -99,7 +107,7 @@ static void run_all(void)
 
     progress("Scoring...");
     score_compute(&g_res);
-    report_build(&g_res, g_report, sizeof g_report);
+    g_report_len = report_build(&g_res, g_report, sizeof g_report);
     SetWindowTextA(g_text, g_report);
 
     if (save_report(path, sizeof path)) {

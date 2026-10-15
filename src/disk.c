@@ -31,36 +31,43 @@ void bench_disk(DiskResult *r, const char *dir, double free_mb, unsigned ram_mb,
     /* try to bypass the cache; if the system refuses, use a file bigger than RAM */
     h = open_file(path, 1, 1);
     r->unbuffered = (h != INVALID_HANDLE_VALUE);
-    if (h != INVALID_HANDLE_VALUE) CloseHandle(h);
+    if (!r->unbuffered) h = open_file(path, 1, 0);
+    if (h == INVALID_HANDLE_VALUE) { rt_fmt(r->err, sizeof r->err, "cannot create %s", path); return; }
 
     mb = r->unbuffered ? 128 : ram_mb + ram_mb / 2;
     if (mb < 64) mb = 64;
     if (mb > 1024) mb = 1024;
     while (mb > 8 && mb + 50 > free_mb) mb /= 2;
-    if (mb + 20 > free_mb) { rt_fmt(r->err, sizeof r->err, "not enough free space in %s", dir); return; }
+    if (mb + 20 > free_mb) {
+        CloseHandle(h); DeleteFileA(path);
+        rt_fmt(r->err, sizeof r->err, "not enough free space in %s", dir); return;
+    }
     r->file_mb = mb;
     blocks = mb * (1024 * 1024 / BLOCK);
 
     buf = rt_alloc(BLOCK);
-    if (!buf) { strcpy(r->err, "out of memory"); return; }
-    for (i = 0; i < BLOCK; i++) buf[i] = (unsigned char)rt_rand();
+    if (!buf) { CloseHandle(h); DeleteFileA(path); strcpy(r->err, "out of memory"); return; }
+    for (i = 0; i < BLOCK / 4; i++) ((unsigned *)buf)[i] = rt_rand();
 
     /* sequential write */
     rt_fmt(msg, sizeof msg, "Disk: writing a %u MB test file...", mb); p(msg);
-    h = open_file(path, 1, r->unbuffered);
-    if (h == INVALID_HANDLE_VALUE) { rt_fmt(r->err, sizeof r->err, "cannot create %s", path); rt_free(buf); return; }
     t0 = now_sec();
     for (i = 0; i < blocks; i++) {
         if (!WriteFile(h, buf, BLOCK, &done, 0) || done != BLOCK) {
             CloseHandle(h); DeleteFileA(path); rt_free(buf);
             strcpy(r->err, "write failed"); return;
         }
-        if ((i & 31) == 31) p(0);
+        if ((i & 3) == 3) {
+            p(0);
+            if (r->unbuffered && i >= 63 && now_sec() - t0 >= 4.0) { i++; break; }
+        }
     }
+    blocks = i;
+    r->file_mb = (blocks * (BLOCK / 1024)) / 1024;
     FlushFileBuffers(h);
     t = now_sec() - t0;
     CloseHandle(h);
-    r->write_mbs = mb / t;
+    r->write_mbs = (double)blocks * (BLOCK / (1024.0 * 1024.0)) / t;
 
     /* sequential read */
     p("Disk: reading it back...");
@@ -69,16 +76,19 @@ void bench_disk(DiskResult *r, const char *dir, double free_mb, unsigned ram_mb,
     t0 = now_sec();
     for (i = 0; i < blocks; i++) {
         if (!ReadFile(h, buf, BLOCK, &done, 0) || done != BLOCK) break;
-        if ((i & 31) == 31) p(0);
+        if ((i & 3) == 3) {
+            p(0);
+            if (r->unbuffered && i >= 63 && now_sec() - t0 >= 4.0) { i++; break; }
+        }
     }
     t = now_sec() - t0;
-    r->read_mbs = (double)i * BLOCK / (1024.0 * 1024.0) / t;
+    r->read_mbs = (double)i * (BLOCK / (1024.0 * 1024.0)) / t;
 
     /* random 4 KB reads: about two seconds or 400 reads */
     p("Disk: random access...");
     n = 0; t0 = now_sec();
     do {
-        unsigned off = (rt_rand() % (mb * 256u)) * 4096u;
+        unsigned off = (rt_rand() % (blocks * (BLOCK / 4096u))) * 4096u;
         SetFilePointer(h, (LONG)off, 0, FILE_BEGIN);
         ReadFile(h, buf, 4096, &done, 0);
         n++;

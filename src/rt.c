@@ -4,16 +4,19 @@
 
 void *memset(void *d, int c, unsigned n)
 {
-    unsigned char *p = d;
-    while (n--) *p++ = (unsigned char)c;
-    return d;
+    void *r = d;
+    __asm__ volatile("cld\n\trep stosb" : "+D"(d), "+c"(n) : "a"((unsigned char)c) : "memory");
+    return r;
 }
 
 void *memcpy(void *d, const void *s, unsigned n)
 {
-    unsigned char *p = d; const unsigned char *q = s;
-    while (n--) *p++ = *q++;
-    return d;
+    void *r = d;
+    unsigned w = n >> 2, b = n & 3;
+    /* the tail count sits in eax so it cannot share ecx with the word count */
+    __asm__ volatile("cld\n\trep movsl\n\tmovl %3, %%ecx\n\trep movsb"
+                     : "+D"(d), "+S"(s), "+c"(w) : "a"(b) : "memory");
+    return r;
 }
 
 void *memmove(void *d, const void *s, unsigned n)
@@ -59,13 +62,14 @@ int rt_strncasecmp(const char *a, const char *b, unsigned n)
 const char *rt_stristr(const char *hay, const char *needle)
 {
     unsigned n = strlen(needle);
+    int c0;
     if (!n) return hay;
+    c0 = lc((unsigned char)*needle);
     for (; *hay; hay++)
-        if (rt_strncasecmp(hay, needle, n) == 0) return hay;
+        if (lc((unsigned char)*hay) == c0 && rt_strncasecmp(hay + 1, needle + 1, n - 1) == 0)
+            return hay;
     return 0;
 }
-
-void rt_lower(char *s) { for (; *s; s++) *s = (char)lc((unsigned char)*s); }
 
 /* ---- formatting: %d %u %x %s %c %f with width, precision and '-' ---- */
 typedef struct { char *p; int left; int n; } Out;
@@ -84,10 +88,10 @@ static void put_field(Out *o, const char *s, int len, int width, int left)
     if (left) while (pad-- > 0) put(o, ' ');
 }
 
-static int utoa(char *buf, unsigned long long v, unsigned base)
+static int utoa(char *buf, unsigned v, unsigned base)
 {
-    char t[24]; int n = 0, i = 0;
-    do { unsigned d = (unsigned)(v % base); t[n++] = (char)(d < 10 ? '0' + d : 'a' + d - 10); v /= base; } while (v);
+    char t[16]; int n = 0, i = 0;
+    do { unsigned d = v % base; t[n++] = (char)(d < 10 ? '0' + d : 'a' + d - 10); v /= base; } while (v);
     while (n) buf[i++] = t[--n];
     return i;
 }
@@ -95,15 +99,15 @@ static int utoa(char *buf, unsigned long long v, unsigned base)
 static int dtoa(char *buf, double v, int prec)
 {
     int i = 0, k;
-    unsigned long long ip, fp, scale = 1;
+    unsigned ip, fp, scale = 1;
     if (v != v) { buf[0] = 'n'; buf[1] = 'a'; buf[2] = 'n'; return 3; }
     if (v < 0) { buf[i++] = '-'; v = -v; }
-    if (v > 1e18) { buf[i++] = '>'; buf[i++] = '1'; buf[i++] = 'e'; buf[i++] = '1'; buf[i++] = '8'; return i; }
-    if (prec > 9) prec = 9;
+    if (v >= 4294967295.0) { buf[i++] = '>'; buf[i++] = '4'; buf[i++] = 'e'; buf[i++] = '9'; return i; }
+    if (prec > 6) prec = 6;
     for (k = 0; k < prec; k++) scale *= 10;
-    v = v * (double)scale + 0.5;
-    ip = (unsigned long long)v;
-    fp = ip % scale; ip /= scale;
+    ip = (unsigned)v;
+    fp = (unsigned)((v - (double)ip) * (double)scale + 0.5);
+    if (fp >= scale) { ip++; fp -= scale; }
     i += utoa(buf + i, ip, 10);
     if (prec) {
         char t[12]; int n = utoa(t, fp, 10);
@@ -127,7 +131,7 @@ int rt_vfmt(char *out, int cap, const char *f, va_list ap)
         if (*f == '.') { f++; prec = 0; while (*f >= '0' && *f <= '9') prec = prec * 10 + (*f++ - '0'); }
         switch (*f) {
         case 'd': { int v = va_arg(ap, int); len = 0;
-                    if (v < 0) { buf[len++] = '-'; len += utoa(buf + len, (unsigned)(-v), 10); }
+                    if (v < 0) { buf[len++] = '-'; len += utoa(buf + len, 0u - (unsigned)v, 10); }
                     else len = utoa(buf, (unsigned)v, 10);
                     put_field(&o, buf, len, width, left); break; }
         case 'u': len = utoa(buf, va_arg(ap, unsigned), 10); put_field(&o, buf, len, width, left); break;

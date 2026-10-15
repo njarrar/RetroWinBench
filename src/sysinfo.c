@@ -28,13 +28,10 @@ static unsigned long long rdtsc(void)
 
 static void trim(char *s)
 {
-    char *p = s, *q;
-    while (*p == ' ') p++;
-    if (p != s) memmove(s, p, strlen(p) + 1);
-    q = s + strlen(s);
-    while (q > s && q[-1] == ' ') *--q = 0;
-    /* fold runs of spaces */
-    for (p = q = s; *p; p++) if (!(*p == ' ' && q > s && q[-1] == ' ')) *q++ = *p;
+    char *p = s, *q = s;
+    for (; *p; p++)
+        if (*p != ' ' || (q > s && q[-1] != ' ')) *q++ = *p;
+    if (q > s && q[-1] == ' ') q--;
     *q = 0;
 }
 
@@ -87,11 +84,14 @@ static void cpu_mhz(SysInfo *si)
     unsigned long long c0, c1;
     double t0, t1;
     HANDLE th = GetCurrentThread();
-    int old = GetThreadPriority(th);
+    int old = GetThreadPriority(th), i;
     if (!si->has_tsc) return;
     SetThreadPriority(th, THREAD_PRIORITY_TIME_CRITICAL);
     t0 = now_sec(); c0 = rdtsc();
-    do t1 = now_sec(); while (t1 - t0 < 0.25);
+    do {
+        for (i = 0; i < 256; i++) __asm__ volatile("");
+        t1 = now_sec();
+    } while (t1 - t0 < 0.10);
     c1 = rdtsc();
     SetThreadPriority(th, old);
     si->cpu_mhz = (double)(c1 - c0) / (t1 - t0) / 1e6;
@@ -137,6 +137,11 @@ static void dx_info(SysInfo *si)
 
 typedef BOOL (WINAPI *EnumDD)(LPCSTR, DWORD, PDISPLAY_DEVICEA, DWORD);
 typedef BOOL (WINAPI *FreeEx)(LPCSTR, PULARGE_INTEGER, PULARGE_INTEGER, PULARGE_INTEGER);
+typedef struct {
+    DWORD dwLength, dwMemoryLoad;
+    unsigned long long ullTotalPhys, ullAvailPhys, ullTotalPageFile, ullAvailPageFile, ullTotalVirtual, ullAvailVirtual, ullAvailExtendedVirtual;
+} WB_MEMSTATUSEX;
+typedef BOOL (WINAPI *MemEx)(WB_MEMSTATUSEX *);
 
 static void adapter_info(SysInfo *si)
 {
@@ -194,7 +199,10 @@ static void os_info(SysInfo *si)
 void sysinfo_get(SysInfo *si)
 {
     MEMORYSTATUS ms;
+    WB_MEMSTATUSEX msex;
     SYSTEM_INFO sys;
+    HMODULE k32 = GetModuleHandleA("kernel32.dll");
+    MemEx mex;
     FreeEx fx;
     char root[4];
 
@@ -206,16 +214,22 @@ void sysinfo_get(SysInfo *si)
     GetSystemInfo(&sys);
     si->cores = sys.dwNumberOfProcessors ? (int)sys.dwNumberOfProcessors : 1;
 
-    ms.dwLength = sizeof ms;
-    GlobalMemoryStatus(&ms);
-    si->ram_mb = (unsigned)((ms.dwTotalPhys + 512 * 1024) / (1024 * 1024));
+    mex = (MemEx)GetProcAddress(k32, "GlobalMemoryStatusEx");
+    memset(&msex, 0, sizeof msex); msex.dwLength = sizeof msex;
+    if (mex && mex(&msex)) {
+        si->ram_mb = (unsigned)((msex.ullTotalPhys + 512 * 1024) >> 20);
+    } else {
+        ms.dwLength = sizeof ms;
+        GlobalMemoryStatus(&ms);
+        si->ram_mb = (unsigned)((ms.dwTotalPhys >> 20) + ((ms.dwTotalPhys >> 19) & 1));
+    }
 
     adapter_info(si);
 
     if (!GetTempPathA(sizeof si->temp_dir, si->temp_dir) || GetFileAttributesA(si->temp_dir) == 0xFFFFFFFF)
         strcpy(si->temp_dir, "C:\\");
     root[0] = si->temp_dir[0]; root[1] = ':'; root[2] = '\\'; root[3] = 0;
-    fx = (FreeEx)GetProcAddress(GetModuleHandleA("kernel32.dll"), "GetDiskFreeSpaceExA");
+    fx = (FreeEx)GetProcAddress(k32, "GetDiskFreeSpaceExA");
     if (fx) {
         ULARGE_INTEGER a, t, f;
         if (fx(root, &a, &t, &f)) si->disk_free_mb = (double)a.QuadPart / (1024.0 * 1024.0);

@@ -4,7 +4,7 @@ A small benchmark for Windows 98 and Windows XP PCs. It tests the CPU, RAM,
 disk and 3D card, sums them up in one score, compares that score with
 hardware from 1997 to 2008, and lists which classic games the PC can run.
 
-One 64 KB .exe. No installer, no internet, no extra DLLs. It runs on any
+One 58 KB .exe. No installer, no internet, no extra DLLs. It runs on any
 CPU from a 486 up, on Windows 95 OSR2, 98, ME, 2000, XP and later.
 
 ![RetroWinBench after a test run](docs/screenshot.png)
@@ -14,7 +14,7 @@ so high and the 3D test reports software drawing.*
 
 ## Download
 
-[build/RetroWinBench-1.0.zip](build/RetroWinBench-1.0.zip) holds
+[build/RetroWinBench-1.1.zip](build/RetroWinBench-1.1.zip) holds
 `winbench.exe` and `README.txt`. Copy them to the old PC on a floppy, CD
 or USB stick and double-click the .exe.
 

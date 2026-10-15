@@ -275,21 +275,33 @@ static void whet_run(int loop)
 void bench_cpu(CpuResult *r, ProgressFn p)
 {
     int runs = 1000, loop = 1;
-    double t, t0;
+    double t, t0, next;
 
     p("CPU: integer test (Dhrystone)...");
     for (;;) {
         t0 = now_sec(); dhry_run(runs); t = now_sec() - t0;
-        if (t > 2.0 || runs > (1 << 29)) break;
-        runs *= (t < 0.05) ? 10 : 2;
+        p(0);
+        if (t > 2.0 || runs >= (1 << 29)) break;
+        if (t >= 0.1) {
+            next = (double)runs * (2.1 / t);
+            runs = next > (double)(1 << 29) ? (1 << 29) : (int)next;
+        } else {
+            runs *= (t < 0.02) ? 10 : 4;
+        }
     }
     r->dmips = runs / t / 1757.0;
 
     p("CPU: floating point test (Whetstone)...");
     for (;;) {
         t0 = now_sec(); whet_run(loop); t = now_sec() - t0;
-        if (t > 2.0 || loop > (1 << 20)) break;
-        loop *= (t < 0.05) ? 10 : 2;
+        p(0);
+        if (t > 2.0 || loop >= (1 << 20)) break;
+        if (t >= 0.1) {
+            next = (double)loop * (2.1 / t);
+            loop = next > (double)(1 << 20) ? (1 << 20) : (int)next;
+        } else {
+            loop *= (t < 0.02) ? 10 : 4;
+        }
     }
     /* one loop = 100,000 Whetstone instructions */
     r->mwips = 100.0 * loop / t / 1000.0;

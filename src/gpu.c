@@ -109,16 +109,17 @@ void bench_gpu(GpuResult *r, HINSTANCE inst, ProgressFn p)
     ChoosePF choose; SetPF setpf; SwapB swap;
     WNDCLASSA wc;
     unsigned i;
-    int pf, frames, k;
+    int pf, k, batch;
+    unsigned total_quads, total_tris;
     double t0, t;
     const char *s;
-    static unsigned char tex[128 * 128 * 4];
     float *va = 0; unsigned char *ca = 0;
-    int ntri = 0;
+    int ntri = 20000;
 
     r->ok = 0;
     p("3D: starting OpenGL...");
-    lib = LoadLibraryA("opengl32.dll");
+    lib = GetModuleHandleA("opengl32.dll");
+    if (!lib) lib = LoadLibraryA("opengl32.dll");
     gdi = GetModuleHandleA("gdi32.dll");
     if (!lib) { strcpy(r->err, "opengl32.dll not found (install OpenGL / video driver)"); return; }
     for (i = 0; i < sizeof gl_names / sizeof gl_names[0]; i++) {
@@ -173,13 +174,19 @@ void bench_gpu(GpuResult *r, HINSTANCE inst, ProgressFn p)
 
     /* ---- fill rate: full-window textured quads ---- */
     p("3D: fill rate...");
-    for (i = 0; i < sizeof tex; i++) tex[i] = (unsigned char)((i * 7) ^ (i >> 9));
-    gl.TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex);
+    va = rt_alloc(ntri * 3 * 2 * sizeof(float));
+    ca = rt_alloc(ntri * 3 * 4);
+    if (!va || !ca) { strcpy(r->err, "out of memory"); goto done; }
+    {
+        unsigned char *tex = (unsigned char *)va;
+        for (i = 0; i < 128 * 128 * 4; i++) tex[i] = (unsigned char)((i * 7) ^ (i >> 9));
+        gl.TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex);
+    }
     gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     gl.Enable(GL_TEXTURE_2D);
     gl.Color3f(1, 1, 1);
-    k = 4; frames = 0;
+    k = 4; total_quads = 0;
     gl.Clear(GL_COLOR_BUFFER_BIT); gl.Finish();
     t0 = now_sec();
     do {
@@ -194,43 +201,39 @@ void bench_gpu(GpuResult *r, HINSTANCE inst, ProgressFn p)
         }
         gl.End();
         gl.Finish();
-        frames++;
+        total_quads += (unsigned)k;
         t = now_sec() - t0;
-        if (frames == 1 && t < 0.02) k = 32;   /* fast card: draw more per batch */
+        if (k == 4 && t < 0.02) k = 32;   /* fast card: draw more per batch */
         p(0);
     } while (t < 2.0);
-    r->fill_mpix = (double)frames * k * W * H / t / 1e6;
+    r->fill_mpix = (double)total_quads * W * H / t / 1e6;
     swap(dc);
     gl.Disable(GL_TEXTURE_2D);
 
     /* ---- triangles: many small colored triangles from a vertex array ---- */
     p("3D: triangle rate...");
-    ntri = 20000;
-    va = rt_alloc(ntri * 3 * 2 * sizeof(float));
-    ca = rt_alloc(ntri * 3 * 4);
-    if (va && ca) {
-        for (i = 0; i < (unsigned)ntri; i++) {
-            float x = (float)(rt_rand() % (W - 8)), y = (float)(rt_rand() % (H - 8));
-            float *v = va + i * 6;
-            v[0] = x; v[1] = y; v[2] = x + 6; v[3] = y; v[4] = x; v[5] = y + 6;
-        }
-        for (i = 0; i < (unsigned)ntri * 12; i++) ca[i] = (unsigned char)rt_rand();
-        gl.ShadeModel(GL_SMOOTH);
-        gl.EnableClientState(GL_VERTEX_ARRAY);
-        gl.EnableClientState(GL_COLOR_ARRAY);
-        gl.VertexPointer(2, GL_FLOAT, 0, va);
-        gl.ColorPointer(4, GL_UNSIGNED_BYTE, 0, ca);
-        frames = 0; t0 = now_sec();
-        do {
-            gl.DrawArrays(GL_TRIANGLES, 0, ntri * 3);
-            gl.Finish();
-            frames++;
-            t = now_sec() - t0;
-            p(0);
-        } while (t < 2.0);
-        r->mtris = (double)frames * ntri / t / 1e6;
-        swap(dc);
+    for (i = 0; i < (unsigned)ntri; i++) {
+        float x = (float)(rt_rand() % (W - 8)), y = (float)(rt_rand() % (H - 8));
+        float *v = va + i * 6;
+        v[0] = x; v[1] = y; v[2] = x + 6; v[3] = y; v[4] = x; v[5] = y + 6;
     }
+    for (i = 0; i < (unsigned)ntri * 3; i++) ((unsigned *)ca)[i] = rt_rand();
+    gl.ShadeModel(GL_SMOOTH);
+    gl.EnableClientState(GL_VERTEX_ARRAY);
+    gl.EnableClientState(GL_COLOR_ARRAY);
+    gl.VertexPointer(2, GL_FLOAT, 0, va);
+    gl.ColorPointer(4, GL_UNSIGNED_BYTE, 0, ca);
+    batch = 2500; total_tris = 0; t0 = now_sec();
+    do {
+        gl.DrawArrays(GL_TRIANGLES, 0, batch * 3);
+        gl.Finish();
+        total_tris += (unsigned)batch;
+        t = now_sec() - t0;
+        if (batch < ntri && t < 0.05) batch = ntri;
+        p(0);
+    } while (t < 2.0);
+    r->mtris = (double)total_tris / t / 1e6;
+    swap(dc);
     r->ok = 1;
 
 done:

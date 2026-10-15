@@ -1,7 +1,7 @@
-RetroWinBench 1.0
+RetroWinBench 1.1
 =================
 
-One small program (winbench.exe, about 60 KB) that tests the CPU, RAM,
+One small program (winbench.exe, about 58 KB) that tests the CPU, RAM,
 disk and 3D card of a Windows 98 or Windows XP PC, sums it up in one
 score, compares that score with period hardware, and lists which classic
 games the PC can run.
@@ -34,7 +34,8 @@ CPU    Dhrystone 2.1 (whole numbers) and Whetstone (decimal maths).
 RAM    Read, write and copy speed on a block of up to 16 MB, larger
        than any CPU cache of the time.
 Disk   Writes a test file to the TEMP folder (128 MB, or a file larger
-       than RAM if Windows will not skip its file cache), reads it back,
+       than RAM if Windows will not skip its file cache; slow drives
+       stop after about 4 seconds each way), reads it back,
        then times random 4 KB reads. The file is deleted at the end.
 3D     Uses OpenGL, which ships with Windows 98 and XP. Measures how
        many textured pixels and how many small triangles per second the
